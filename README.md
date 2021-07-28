@@ -1,6 +1,8 @@
-# OpenSIPS Docker Image
-http://www.opensips.org/
+This is inspired and forked from https://github.com/OpenSIPS/docker-opensips.
 
+# OpenSIPS Docker Image
+
+http://www.opensips.org/
 Docker recipe for building and starting an OpenSIPS image
 
 ## Building the image
@@ -25,6 +27,36 @@ To start the image, simply run:
 make start
 ```
 
+To specify expose port when start the image, run:
+```
+OPENSIPS_EX_PORT=5060 make start
+```
+
+To enter the container shell, simply run:
+```
+make shell
+```
+
+To get the logs from OpenSIPS, simply run:
+```
+make logs
+```
+
+To stop the container, simply run:
+```
+make stop
+```
+
+To resume the container, simply run:
+```
+make resume
+```
+
+To remove the container, simply run:
+```
+make remove
+```
+
 ## Variables
 You can set different variables to tune your deployment:
  * `OPENSIPS_VERSION` - sets the opensips version (Default: `3.1`)
@@ -32,8 +64,5 @@ You can set different variables to tune your deployment:
  * `OPENSIPS_DOCKER_TAG` - indicates the docker tag (Default: `latest`)
  * `OPENSIPS_CLI` - specifies whether to install opensips-cli (`true`) or not (`false`) (Default: `true`)
  * `OPENSIPS_EXTRA_MODULES` - specifies extra opensips modules to install (Default: no other module)
+ * `OPENSIPS_EX_PORT` - specifies the expose port using on host (Default: 5060)
 
-## Packages on DockerHub
-
-Released docker packages are visible on DockerHub
-https://hub.docker.com/r/opensips/opensips

@@ -1,5 +1,5 @@
-FROM debian:buster
-LABEL maintainer="Razvan Crainea <razvan@opensips.org>"
+FROM ubuntu:20.04
+LABEL maintainer="josh chen"
 
 USER root
 
@@ -29,8 +29,13 @@ RUN if [ -n "${OPENSIPS_EXTRA_MODULES}" ]; then \
     apt-get -y install ${OPENSIPS_EXTRA_MODULES} \
     ;fi
 
+RUN apt-get install -y net-tools
+
 RUN rm -rf /var/lib/apt/lists/*
+
 RUN sed -i "s/^\(socket\|listen\)=udp.*5060/\1=udp:eth0:5060/g" /etc/opensips/opensips.cfg
+# redirect log to stderr
+RUN sed -i "s/^log_stderror=no/log_stderror=yes/g" /etc/opensips/opensips.cfg
 
 EXPOSE 5060/udp
 
